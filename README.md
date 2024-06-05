@@ -1,1 +1,0 @@
-# Abschlussprojekt_2024_API-2_colpig_Board_OnlineShop
