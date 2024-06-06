@@ -1,0 +1,21 @@
+{
+  "name": "abschlussprojekt_2024_api-2_colpig_board_onlineshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.4.0",
+    "nodemon": "^3.1.3"
+  }
+}
