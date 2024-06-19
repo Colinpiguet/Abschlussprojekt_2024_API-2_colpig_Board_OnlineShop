@@ -1,28 +1,53 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const products = [
-      { id: 1, name: 'Produkt 1', price: '19.99€', image: 'image1.jpg' },
-      { id: 2, name: 'Produkt 2', price: '29.99€', image: 'image2.jpg' },
-      { id: 3, name: 'Produkt 3', price: '39.99€', image: 'image3.jpg' },
-      { id: 4, name: 'Produkt 4', price: '49.99€', image: 'image4.jpg' },
-      { id: 5, name: 'Produkt 5', price: '49.99€', image: 'image5.jpg' },
-      { id: 6, name: 'Produkt 6', price: '49.99€', image: 'image6.jpg' },
-      { id: 4, name: 'Produkt 4', price: '49.99€', image: 'image4.jpg' },
-    ];
+document.addEventListener('DOMContentLoaded', async function() {
   
-    const productList = document.getElementById('product-list');
-  
-    products.forEach(product => {
-      const productCard = document.createElement('div');
-      productCard.classList.add('product-card');
-  
-      productCard.innerHTML = `
-        <h2>${product.name}</h2>
-        <img src="${product.image}" alt="${product.name}">
-        <p>${product.price}</p>
-        <button>Zum Warenkorb hinzufügen</button>
-      `;
-  
-      productList.appendChild(productCard);
-    });
-  });
+  // Daten für Produkte von Backend holen
+  const response = await fetch('http://10.80.4.29:3000/products')
+  const products = await response.json();
 
+  // Alle Produkte auf der Startseite anzeigen
+  const productList = document.getElementById('product-list');
+  
+  products.forEach(product => {
+    const productCard = document.createElement('div');
+    productCard.classList.add('product-card');
+    
+    productCard.innerHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <h2>${product.name}</h2>
+      <p>${product.price}</p>
+    `;
+    
+    productCard.addEventListener('click', () => viewProduct(product));
+    productList.appendChild(productCard);
+  });
+});
+
+// Funktion zur Anzeige eines einzelnen Produkts
+function viewProduct(product) {
+  localStorage.setItem('selectedProduct', JSON.stringify(product));
+  window.location.href = 'product.html';
+}
+
+// Hamburger Menü
+const hamMenu = document.querySelector(".ham-menu");
+const offScreenMenu = document.querySelector(".off-screen-menu");
+
+hamMenu.addEventListener("click", () => {
+  hamMenu.classList.toggle("active");
+  offScreenMenu.classList.toggle("active");
+});
+
+// Dropdown im Menü
+const dropdowns = document.querySelectorAll('.dropdown-btn');
+
+dropdowns.forEach(dropdown => {
+  dropdown.addEventListener('click', () => {
+    dropdown.classList.toggle('active');
+    const dropdownContent = dropdown.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+});

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Shop</title>
+  <title>Produktdetails</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap">
@@ -12,7 +13,6 @@
 <body>
 
   <header>
-
     <div class="off-screen-menu">
       <ul>
         <li><a href="index.html">Start</a></li>
@@ -37,24 +37,34 @@
         <li><a href="contact.html">Kontakt</a></li>
       </ul>
     </div>
-    
-    <nav>
-      <div class="ham-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </nav>
 
-    <h1>Online Shop</h1>
-    <a href="cart.html"><img src="images/cart.jpg" class="imgHeader"></a>
-
+      <nav>
+        <div class="ham-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+        <a href="index.html"><h1>Online Shop</h1></a>
+        <a href="cart.html"><img src="images/cart.jpg" class="imgHeader"></a>
   </header>
 
   <main>
-    <section class="product-list" id="product-list">
+    <section class="product-detail" id="product-detail">
+      <section class="product-image-section">
+        <img id="product-image" src="" alt="Produktbild">
+      </section>
+      <section class="product-info-section">
+        <h2 id="product-name"></h2>
+        <h3 id="product-price"></h3>
+        <p id="product-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam lacus vel convallis iaculis. Duis nec bibendum nunc. Vivamus vehicula risus et lectus aliquam, a sollicitudin neque volutpat. Proin id ante euismod, tincidunt lacus ut, rutrum arcu.</p>
+        </p>
+        <button id="add-to-cart">Zum Warenkorb hinzufügen</button>
+      </section>
     </section>
   </main>
+  
 
   <footer>
     <div class="footer-container">
@@ -63,7 +73,7 @@
         <ul>
           <li>Email: info@onlineshop.de</li>
           <li>Telefon: +49 123 456 789</li>
-          <li>Adresse: Musterstrasse 1, 12345 Musterstadt</li>
+          <li>Adresse: Musterstraße 1, 12345 Musterstadt</li>
         </ul>
       </div>
       <div class="footer-column">
@@ -80,7 +90,8 @@
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script src="js/product.js"></script>
 
 </body>
 </html>
+
