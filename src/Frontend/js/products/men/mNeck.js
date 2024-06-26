@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function() {
     
     // Daten für Produkte von Backend holen
-    const response = await fetch('http://10.80.4.29:3000/products')
+    const response = await fetch('http://localhost:5000/api/products')
     const products = await response.json();
   
     // Produkte der Kategorie mNeck anzeigen
@@ -13,10 +13,12 @@ document.addEventListener('DOMContentLoaded', async function() {
       const productCard = document.createElement('div');
       productCard.classList.add('product-card');
   
+      const price = product.price ? `${parseFloat(product.price / 100).toFixed(2)} CHF` : 'Preis nicht verfügbar';
+      
       productCard.innerHTML = `
         <img src="${product.image}" alt="${product.name}">
         <h2>${product.name}</h2>
-        <p>${product.price}</p>
+        <p>${price}</p>
       `;
   
       productCard.addEventListener('click', () => viewProduct(product));
