@@ -1,0 +1,90 @@
+/* Stile für Login und Registrierung */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+
+  .login-container, .register-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-container h2, .register-container h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #000000;
+  }
+  
+  .login-container form, .register-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-container .form-group, .register-container .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .login-container form label, .register-container form label {
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555555;
+  }
+  
+  .login-container form input, .register-container form input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+  
+  .login-container form input:focus, .register-container form input:focus {
+    outline: none;
+    border-color: #000000;
+  }
+  
+  .login-container form button, .register-container form button {
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .login-container form button:hover, .register-container form button:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  .login-container #message, .register-container #message {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .login-container p, .register-container p {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .login-container p a, .register-container p a {
+    color: #000000;
+  }
+  
+  .login-container p a:hover, .register-container p a:hover {
+    color: #a0a0a0;
+  }

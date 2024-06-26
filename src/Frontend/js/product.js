@@ -1,14 +1,34 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const product = JSON.parse(localStorage.getItem('selectedProduct'));
+  const product = JSON.parse(localStorage.getItem('selectedProduct'));
+  if (product) {
+    document.getElementById('product-image').src = product.image;
+    document.getElementById('product-name').textContent = product.name;
+    const price = product.price ? `${parseFloat(product.price / 100).toFixed(2)} CHF` : 'Preis nicht verfügbar';
+    document.getElementById('product-price').textContent = price;
+    document.getElementById('product-description').textContent = product.description;
+  }
 
-    if (product) {
-      document.getElementById('product-name').textContent = product.name;
-      document.getElementById('product-image').src = product.image;
-      document.getElementById('product-price').textContent = product.price;
-      document.getElementById('product-description').textContent = product.description;
-    }
-    
+  // Hier solltest du das accessToken aus dem localStorage abrufen
+  const accessToken = localStorage.getItem('accessToken');
+
+  document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+    addToCart(product._id); // product._id ist der productId
   });
+});
+
+// Die addToCart Funktion aktualisieren, um productId und accessToken zu übergeben
+const addToCart = async (productId) => {
+  const product = await fetch(`http://localhost:5000/api/products/find/${productId}`)
+  const productJSON = await product.json()
+  console.log(productJSON);
+
+let currentCart = JSON.parse(localStorage.getItem("cart")) || [];
+currentCart.push({
+    productId: productJSON
+});
+localStorage.setItem("cart", JSON.stringify(currentCart));
+
+};
 
 // Hamburger Menu ------------------------------------------------------
 const hamMenu = document.querySelector(".ham-menu");
