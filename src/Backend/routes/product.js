@@ -1,3 +1,18 @@
+/**
+ * Onlineshop
+ *
+ * Author: Colin Piguet
+ *
+ * Description:
+ * This project is an online shop where you can add products to a cart, 
+ * log in, or register. You can order these products with the integration 
+ * of Stripe.
+ *
+ * Date: 28.06.2024
+ *
+ * Version: 1.0
+ */
+
 const Product = require("../models/products");
 const {
   verifyToken,
@@ -7,7 +22,7 @@ const {
 
 const router = require("express").Router();
 
-//CREATE
+// CREATE Produkt
 router.post("/", verifyTokenAndAdmin, async (req, res) => {
   const newProduct = new Product(req.body);
 
@@ -19,7 +34,7 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
-//UPDATE
+// UPDATE Produkt
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
@@ -35,7 +50,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
-//DELETE
+// DELETE Produkt
 router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
@@ -45,7 +60,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
-//GET PRODUCT
+// GET Produkt
 router.get("/find/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -55,15 +70,15 @@ router.get("/find/:id", async (req, res) => {
   }
 });
 
-// GET ALL PRODUCTS
-router.get('/', async (req, res) => {
+// GET alle Produkte
+router.get("/", async (req, res) => {
   try {
     const products = await Product.find(); // Produkte aus der Datenbank abrufen
-    res.status(200).json(products); // Produkte als JSON zurückschicken
+    res.status(200).json(products);
   } catch (err) {
     console.error('Fehler beim Laden der Produkte:', err);
     res.status(500).json({ error: 'Serverfehler beim Laden der Produkte' });
   }
 });
 
-module.exports = router;
+module.exports = router; // Export des Routers

@@ -1,3 +1,18 @@
+/**
+ * Onlineshop
+ *
+ * Author: Colin Piguet
+ *
+ * Description:
+ * This project is an online shop where you can add products to a cart, 
+ * log in, or register. You can order these products with the integration 
+ * of Stripe.
+ *
+ * Date: 28.06.2024
+ *
+ * Version: 1.0
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
   const product = JSON.parse(localStorage.getItem('selectedProduct'));
   if (product) {
@@ -27,7 +42,6 @@ currentCart.push({
     productId: productJSON
 });
 localStorage.setItem("cart", JSON.stringify(currentCart));
-
 };
 
 // Hamburger Menu ------------------------------------------------------

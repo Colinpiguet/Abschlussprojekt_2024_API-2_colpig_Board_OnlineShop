@@ -1,5 +1,20 @@
+/**
+ * Onlineshop
+ *
+ * Author: Colin Piguet
+ *
+ * Description:
+ * This project is an online shop where you can add products to a cart, 
+ * log in, or register. You can order these products with the integration 
+ * of Stripe.
+ *
+ * Date: 28.06.2024
+ *
+ * Version: 1.0
+ */
+
 function loadCart() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cart = JSON.parse(localStorage.getItem('cart')) || []; // Warenkorb aus dem lokalen Speicher laden
     console.log('Initial cart:', cart);
     const cartElement = document.getElementById('cart');
     const totalPriceElement = document.getElementById('total-price');
@@ -28,6 +43,7 @@ function loadCart() {
         updateTotalPrice();
     }
 
+    // Eventlistener für den Checkout-Button
     document.getElementById('checkout-button').addEventListener('click', async function() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const items = cart.map(product => ({
@@ -61,6 +77,7 @@ function loadCart() {
         }
     });
 
+    // Funktion zum Aktualisieren des Gesamtpreises
     function updateTotalPrice() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const totalPrice = cart.reduce((sum, product) => {
