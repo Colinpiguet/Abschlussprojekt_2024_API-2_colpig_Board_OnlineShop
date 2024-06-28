@@ -1,3 +1,18 @@
+/**
+ * Onlineshop
+ *
+ * Author: Colin Piguet
+ *
+ * Description:
+ * This project is an online shop where you can add products to a cart, 
+ * log in, or register. You can order these products with the integration 
+ * of Stripe.
+ *
+ * Date: 28.06.2024
+ *
+ * Version: 1.0
+ */
+
 const User = require("../models/user");
 const {
   verifyToken,
@@ -7,8 +22,9 @@ const {
 
 const router = require("express").Router();
 
-//UPDATE
+// UPDATE Benutzerinformationen
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+  // Wenn ein Passwort im Request-Body enthalten ist, wird es verschlüsselt
   if (req.body.password) {
     req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
@@ -17,6 +33,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   }
 
   try {
+    // Aktualisierung des Benutzers in der Datenbank
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {
@@ -30,7 +47,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-//DELETE
+// DELETE Benutzer
 router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
@@ -40,10 +57,11 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-//GET USER
+// GET Benutzerinformationen
 router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+    // Ausschliessen des Passworts aus der Antwort
     const { password, ...others } = user._doc;
     res.status(200).json(others);
   } catch (err) {
@@ -51,40 +69,15 @@ router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
-//GET ALL USER
+// GET alle Benutzer
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   const query = req.query.new;
   try {
+    // Abrufen der neuesten Benutzer, wenn der 'new'-Query-Parameter gesetzt ist
     const users = query
       ? await User.find().sort({ _id: -1 }).limit(5)
       : await User.find();
     res.status(200).json(users);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-//GET USER STATS
-router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
-  const date = new Date();
-  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
-
-  try {
-    const data = await User.aggregate([
-      { $match: { createdAt: { $gte: lastYear } } },
-      {
-        $project: {
-          month: { $month: "$createdAt" },
-        },
-      },
-      {
-        $group: {
-          _id: "$month",
-          total: { $sum: 1 },
-        },
-      },
-    ]);
-    res.status(200).json(data)
   } catch (err) {
     res.status(500).json(err);
   }
